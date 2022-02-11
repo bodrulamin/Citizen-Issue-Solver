@@ -5,7 +5,7 @@ import { ConfigService } from 'src/app/services/config.service';
 import { ShoutService } from 'src/app/services/shout.service';
 import { UserService } from 'src/app/services/user.service';
 import { Shout, ShoutStatus } from './shout.model';
-import {ToastrService} from "../../services/toastr.service";
+import {ToastService} from "../../services/toast.service";
 
 @Component({
   selector: 'app-shouts',
@@ -24,7 +24,7 @@ export class ShoutsComponent implements OnInit {
     private shoutService: ShoutService,
     private rout: Router,
     public userService: UserService,
-    private toast: ToastrService,
+    private toast: ToastService,
     private config: ConfigService,
     private activatedRout: ActivatedRoute,
     private categoryService: CategoryService

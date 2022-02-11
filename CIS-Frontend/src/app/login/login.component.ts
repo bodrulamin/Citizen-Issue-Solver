@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from '../services/toastr.service';
+import { ToastService } from '../services/toast.service';
 
 import { UserService } from '../services/user.service';
 
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private rout: Router,
-    private toast: ToastrService,
+    private toast: ToastService,
 
   ) { }
 
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     },err=>{
       this.toast.error(err.message,err.name);
       console.log(err);
-      
+
     })
 
 

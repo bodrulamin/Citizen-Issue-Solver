@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from '../services/toastr.service';
+import { ToastService } from '../services/toast.service';
 
 import { UserService } from '../services/user.service';
 
@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
 
   fg = new FormGroup({
     fullname: new FormControl(""),
-    
+
     username: new FormControl(""),
     password: new FormControl(""),
     password2: new FormControl(""),
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
     private activatedRout: ActivatedRoute,
     private rout: Router,
     private userService: UserService,
-    private toast:ToastrService,
+    private toast:ToastService,
     ) { }
 
   ngOnInit(): void {
@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
         this.rout.navigate(['/'])
       }
       else{
-        
+
           this.toast.error(res.message)
       }
     })

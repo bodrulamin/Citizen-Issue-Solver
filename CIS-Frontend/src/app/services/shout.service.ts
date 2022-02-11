@@ -9,7 +9,6 @@ import { ConfigService } from './config.service';
 })
 export class ShoutService {
 
-
   constructor(
     private http: HttpClient,
     private config: ConfigService

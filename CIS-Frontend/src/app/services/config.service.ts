@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastrService } from './toastr.service';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class ConfigService {
   shoutGetOneApi = this.host + '/shout/getOne/'
   shoutUpdateStatusApi = this.host + '/shout/updatestatus'
 
-  constructor(private toast:ToastrService) { }
+  constructor(private toast:ToastService) { }
 
   showToast(res: any) {
     switch (res.status) {
@@ -49,5 +49,5 @@ export class ConfigService {
         break;
     }
   }
-  
+
 }
