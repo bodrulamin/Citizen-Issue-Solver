@@ -54,7 +54,7 @@ public class UserController {
 	public ApiResponse sigin(@RequestBody UserPayload payload) throws Exception {
 
 		try {
-			User user = userRepository.findByUsername(payload.getUsername(), payload.getUsertype());
+			User user = userRepository.findByUsernameAndUsertype(payload.getUsername(), payload.getUsertype());
 			if (user == null)
 				throw new Exception(payload.getUsername() + " user not found !");
 

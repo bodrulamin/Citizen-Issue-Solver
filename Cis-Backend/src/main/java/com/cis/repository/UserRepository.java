@@ -12,12 +12,11 @@ import java.util.List;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long>{
 
-	@Query("select u from User u where u.username = ?1 and u.usertype = ?2")
-	User findByUsername(String username, UserType userType);
-	
 
-	@Query("select u from User u where u.usertype = ?1")
-	List<User>  getAllUser(UserType userType);
+	User findByUsernameAndUsertype(String username, UserType userType);
+
+	List<User> findAllByUsertype(UserType userType);
+
 	
 	
 	

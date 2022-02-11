@@ -221,4 +221,7 @@ export class ShoutsComponent implements OnInit {
   }
 
 
+  getUrl(photo: any) {
+    return "url('"+photo+"')";
+  }
 }

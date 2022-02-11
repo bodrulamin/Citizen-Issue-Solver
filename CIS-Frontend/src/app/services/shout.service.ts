@@ -15,8 +15,8 @@ export class ShoutService {
   ) { }
 
 
-  addShout(c: Shout) {
-    return this.http.post<any>(this.config.shoutAddApi, JSON.stringify(c), { headers: this.config.header })
+  addShout(c: FormData) {
+    return this.http.post<any>(this.config.shoutAddApi, c)
   }
 
 

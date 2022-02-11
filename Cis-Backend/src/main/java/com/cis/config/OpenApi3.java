@@ -14,15 +14,14 @@ import org.springframework.context.annotation.Configuration;
 @OpenAPIDefinition(
         servers = {
                 @Server(url = "http://localhost:9002"),
-                @Server(url = "http://103.195.0.74:9002")
+
         },
         tags = {
-                @Tag(name = "question-controller"),
-                @Tag(name = "answer-controller"),
+
         },
 
         info = @Info(
-                title = "Question and Answer API",
+                title = "Citizen Issue Solver API",
                 version = "v1",
                 license = @License(
                         url = "http://localhost:9002/oauth2/authorize/google?redirect_uri=http://localhost:3000/oauth2/redirect",
@@ -30,8 +29,8 @@ import org.springframework.context.annotation.Configuration;
 
                 ),
                 contact = @Contact(
-                        url = "http://103.195.0.74:9002/oauth2/authorize/google?redirect_uri=http://103.195.0.74:3000/oauth2/redirect",
-                        name = "Get Token 103.195.0.74"
+                        url = "citizenissuesolver.com",
+                        name = "Citizen Issue Solver"
                 ),
                 description = "Click on 'Get Token' to get Authorization token.")
 )

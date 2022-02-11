@@ -12,8 +12,7 @@
                 <div *ngFor="let s of shouts" class="col-12 col-sm-6 col-md-6 col-lg-6">
                     <article class="article article-style-b">
                         <div class="article-header">
-                            <div class="article-image" data-background="assets/images/accident.jpg"
-                                style="background-image: url(&quot;assets/images/accident.jpg&quot;);">
+                            <div class="article-image" [ngStyle]="{'background-image': getUrl(s.photo)}">
                             </div>
                             <div class="article-badge">
                                 <div [ngClass]="getStatusClass(s)">

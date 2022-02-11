@@ -13,14 +13,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/category")
 @CrossOrigin(value = "*", maxAge = 3600)
-public class ZCategoryController {
+public class CategoryController {
 
 	private final CategoryRepository categoryRepository;
 
 	private final ApiResponse res;
 
 	@Autowired
-	public ZCategoryController(CategoryRepository categoryRepository, ApiResponse res) {
+	public CategoryController(CategoryRepository categoryRepository, ApiResponse res) {
 		this.categoryRepository = categoryRepository;
 		this.res = res;
 	}
