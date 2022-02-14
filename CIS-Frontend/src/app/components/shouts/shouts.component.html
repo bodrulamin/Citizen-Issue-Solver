@@ -1,79 +1,70 @@
 <div class="main-content">
-    <section class="section">
-        <div class="section-header">
-            <h1>Shouts</h1>
-        </div>
+  <section class="section">
+    <div class="section-header">
+      <h1>Issues</h1>
+    </div>
 
-        <div class="section-body">
-
-
-
-            <div class="row">
-                <div *ngFor="let s of shouts" class="col-12 col-sm-6 col-md-6 col-lg-6">
-                    <article class="article article-style-b">
-                        <div class="article-header">
-                            <div class="article-image" [ngStyle]="{'background-image': getUrl(s.photo)}">
-                            </div>
-                            <div class="article-badge">
-                                <div [ngClass]="getStatusClass(s)">
-                                    <i class="fas fa-star"></i>
-
-                                    {{s.status}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="article-details">
-                            <div class="article-title">
-                                <h2><a href="#">{{s.shoutTitle}}</a></h2>
-                            </div>
+    <div class="section-body">
 
 
-                            <div>{{s.shoutmessage}}</div>
-<div class="col-md-6">
-                                <div class="btn">Category: {{s.categoryName}}</div>
-                            <div class="btn">Location: {{s.address}}</div>
+      <div class="row">
+        <div *ngFor="let s of shouts" class="col-12 col-sm-6 col-md-6 col-lg-6">
+          <article class="article article-style-b">
+            <div class="article-header">
+              <div class="article-image" [ngStyle]="{'background-image': getUrl(s.photo)}">
+              </div>
+              <div class="article-badge">
+                <div [ngClass]="getStatusClass(s)">
+                  <i class="fas fa-star"></i>
 
-                            <div class="btn">Shout Creator: {{s.shouterName}}</div>
-</div>
-
-
-                            <div class="article-cta">
-
-
-                                <div *ngIf="userService.isCitizen()">
-                                    <a (click)="delete(s)" class="btn btn-outline-danger mr-1">Delete</a>
-                                    <a (click)="edit(s)" class="btn btn-outline-info">Edit</a>
-                                </div>
-                                <div *ngIf="userService.isProvider()">
-                                    <button (click)="start(s)"
-                                        class="btn btn-primary mr-1">{{s.status==shoutStatus.draft?'Start':'Started'}}</button>
-                                    <button (click)="markAsCompleted(s)"
-                                        class="btn btn-outline-info">{{s.status==shoutStatus.completed?'Completed':'Mark
-                                        as completed'}}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
+                  {{s.status}}
                 </div>
+              </div>
             </div>
+            <div class="article-details">
+              <div class="article-title">
+                <h2><a href="#">{{s.shoutTitle}}</a></h2>
+              </div>
+
+              <div>{{s.shoutmessage}}</div>
+              <div class="col-md-6">
+                <div class="">Category: {{s.categoryName}}</div>
+                <div class="">Location: {{s.address}}</div>
+                <div class="">Shout Creator: {{s.shouterName}}</div>
+              </div>
 
 
+              <div class="article-cta">
 
 
-
-
-
+                <div *ngIf="userService.isCitizen()">
+                  <a (click)="delete(s)" class="btn btn-outline-danger mr-1">Delete</a>
+                  <a (click)="edit(s)" class="btn btn-outline-info">Edit</a>
+                </div>
+                <div *ngIf="userService.isProvider()">
+                  <button (click)="start(s)"
+                          class="btn btn-primary mr-1">{{s.status == shoutStatus.draft ? 'Start' : 'Started'}}</button>
+                  <button (click)="markAsCompleted(s)"
+                          class="btn btn-outline-info">{{s.status == shoutStatus.completed ? 'Completed' : 'Mark as completed'}}</button>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
-
-        <div id="fixedbutton">
-            <button *ngIf="!userService.isProvider()" (click)="loginToShout()" class="btn btn-lg  btn-danger"><i
-                    class="far fa-edit"></i> Shout</button>
-
-        </div>
+      </div>
 
 
+    </div>
 
-    </section>
+    <div id="fixedbutton">
+      <button *ngIf="!userService.isProvider()" (click)="loginToShout()" class="btn btn-lg  btn-danger"><i
+        class="far fa-edit"></i> Shout
+      </button>
+
+    </div>
+
+
+  </section>
 
 
 </div>
