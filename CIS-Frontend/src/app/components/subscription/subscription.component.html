@@ -11,8 +11,8 @@
                     <div class="card">
                         <div class="card-body text-center">
                             <div class="h5 mb-2">{{item.name}}</div>
-                            <button class="btn btn-outline-primary mr-1" id="toastr-1">Subscribe</button>
-                             <button class="btn btn-outline-danger" id="toastr-1">Unsubcibe</button>
+                            <button class="btn  btn-outline-primary mr-1" (click)='subscribe(item.name)'>Subscribe</button>
+                             <button class="btn  btn-outline-danger"  (click)='unsubscribe(item.name)'>Unsubcibe</button>
                         </div>
                     </div>
                 </div>
