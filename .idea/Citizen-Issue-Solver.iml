@@ -10,9 +10,9 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/CIS-Frontend/dist" />
       <excludeFolder url="file://$MODULE_DIR$/CIS-Frontend/tmp" />
-      <excludeFolder url="file://$MODULE_DIR$/citizen_issue_solver_flutter/.pub" />
-      <excludeFolder url="file://$MODULE_DIR$/citizen_issue_solver_flutter/.dart_tool" />
-      <excludeFolder url="file://$MODULE_DIR$/citizen_issue_solver_flutter/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_citizen_issue_solver/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_citizen_issue_solver/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_citizen_issue_solver/.pub" />
     </content>
     <orderEntry type="jdk" jdkName="jbr-11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />

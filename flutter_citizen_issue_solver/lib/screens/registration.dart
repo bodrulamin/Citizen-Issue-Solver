@@ -1,14 +1,9 @@
 import 'dart:convert';
 
-import 'package:citizen_issue_solver_flutter/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-void main() {
-  runApp(MaterialApp(
-    home: RegistrationPage(),
-  ));
-}
+import '../models/user.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -44,7 +39,6 @@ class _RegistrationBodyState extends State<RegistrationBody> {
   var _usernameController = new TextEditingController();
   var _addressController = new TextEditingController();
   var _passwordController = new TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -90,34 +84,24 @@ class _RegistrationBodyState extends State<RegistrationBody> {
           ),
           ElevatedButton(
             onPressed: () {
-
-
               User user = User(
                   username: _usernameController.text,
                   password: _passwordController.text,
                   usertype: selectedUserType,
                   email: "bodrulamin@gmail.com",
-                  fullname: _usernameController.text ,
-                  address: _addressController.text, phone: '017554654');
+                  fullname: _usernameController.text,
+                  address: _addressController.text,
+                  phone: '017554654');
 
-print(user);
+              print(user);
               fetchResult(user).then((res) {
-
                 print(res.body.toString());
                 const snackBar = SnackBar(
                   content: Text('Sign up Successfull'),
                 );
 
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-
-
               });
-
-
-
-
-
             },
             child: const Text('Register'),
           )
@@ -126,25 +110,22 @@ print(user);
     );
   }
 
-
   Future<http.Response> fetchResult(User user) async {
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
     };
 
-    final response = await http
-        .post(Uri.parse('http://localhost:8080/signup'),headers: requestHeaders,body: jsonEncode(user.toMap()));
+    final response = await http.post(Uri.parse('http://localhost:8080/signup'),
+        headers: requestHeaders, body: jsonEncode(user.toMap()));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      return  response;
+      return response;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to load album');
     }
   }
-
-
 }
