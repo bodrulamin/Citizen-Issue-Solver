@@ -1,18 +1,23 @@
 import 'dart:convert';
 
+import 'package:citizen_issue_solver_flutter/models/api_res.dart';
+import 'package:citizen_issue_solver_flutter/models/user_payload.dart';
+import 'package:citizen_issue_solver_flutter/networks/user_ops.dart';
+import 'package:citizen_issue_solver_flutter/screens/issue_feed.dart';
+import 'package:citizen_issue_solver_flutter/screens/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/user.dart';
 
-class RegistrationPage extends StatefulWidget {
-  const RegistrationPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  _RegistrationPageState createState() => _RegistrationPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _RegistrationPageState extends State<RegistrationPage> {
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +42,6 @@ class _LoginBodyState extends State<LoginBody> {
   var selectedUserType;
 
   final _usernameController = TextEditingController();
-  final _addressController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
@@ -74,58 +78,42 @@ class _LoginBodyState extends State<LoginBody> {
             },
             value: selectedUserType,
           ),
-          TextFormField(
-            controller: _addressController,
-            maxLines: null,
-            keyboardType: TextInputType.multiline,
-            decoration: const InputDecoration(
-              // labelText: "Address",
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              User user = User(
-                  username: _usernameController.text,
-                  password: _passwordController.text,
-                  usertype: selectedUserType,
-                  email: "bodrulamin@gmail.com",
-                  fullname: _usernameController.text,
-                  address: _addressController.text,
-                  phone: '017554654');
+          Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  UserPayload user = UserPayload(
+                      username: _usernameController.text,
+                      password: _passwordController.text,
+                      usertype: selectedUserType);
 
-              print(user);
-              fetchResult(user).then((res) {
-                print(res.body.toString());
-                const snackBar = SnackBar(
-                  content: Text('Sign up Successfull'),
-                );
+                  signIn(user).then((res) {
+                    ApiResponse  apires = ApiResponse.fromMap(jsonDecode(res.body)) ;
+                    SnackBar snackBar = SnackBar(
+                      content: Text(apires.msg),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    if(apires.status == 'success'){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>IssueFeed()));
+                    }
+                  });
 
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              });
-            },
-            child: const Text('Register'),
+
+
+
+                },
+                child: const Text('Login'),
+              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => RegistrationPage()));
+                  },
+                  child: Text('New user? Sign Up here'))
+            ],
           )
         ],
       ),
     );
-  }
-
-  Future<http.Response> fetchResult(User user) async {
-    Map<String, String> requestHeaders = {
-      'Content-type': 'application/json',
-    };
-
-    final response = await http.post(Uri.parse('http://localhost:8080/signup'),
-        headers: requestHeaders, body: jsonEncode(user.toMap()));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      return response;
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load album');
-    }
   }
 }

@@ -1,9 +1,14 @@
 import 'dart:convert';
 
+import 'package:citizen_issue_solver_flutter/models/api_res.dart';
+import 'package:citizen_issue_solver_flutter/networks/user_ops.dart';
+import 'package:citizen_issue_solver_flutter/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/user.dart';
+import 'issue_feed.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -79,53 +84,49 @@ class _RegistrationBodyState extends State<RegistrationBody> {
             maxLines: null,
             keyboardType: TextInputType.multiline,
             decoration: const InputDecoration(
-              // labelText: "Address",
-            ),
+                // labelText: "Address",
+                ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              User user = User(
-                  username: _usernameController.text,
-                  password: _passwordController.text,
-                  usertype: selectedUserType,
-                  email: "bodrulamin@gmail.com",
-                  fullname: _usernameController.text,
-                  address: _addressController.text,
-                  phone: '017554654');
+          Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  User user = User(
+                      username: _usernameController.text,
+                      password: _passwordController.text,
+                      usertype: selectedUserType,
+                      email: "bodrulamin@gmail.com",
+                      fullname: _usernameController.text,
+                      address: _addressController.text,
+                      phone: '017554654');
 
-              print(user);
-              fetchResult(user).then((res) {
-                print(res.body.toString());
-                const snackBar = SnackBar(
-                  content: Text('Sign up Successfull'),
-                );
+                  print(user);
+                  signUp(user).then((res) {
+                    print(res.body);
+                    ApiResponse apires = ApiResponse.fromMap(jsonDecode(res.body)) ;
 
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              });
-            },
-            child: const Text('Register'),
+                    SnackBar snackBar = SnackBar(
+                      content: Text(apires.msg),
+                    );
+
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    if(apires.status == 'success'){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>IssueFeed()));
+                    }
+                  });
+                },
+                child: const Text('Register'),
+              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => LoginPage()));
+                  },
+                  child: Text('Already a user? Sign in here'))
+            ],
           )
         ],
       ),
     );
-  }
-
-  Future<http.Response> fetchResult(User user) async {
-    Map<String, String> requestHeaders = {
-      'Content-type': 'application/json',
-    };
-
-    final response = await http.post(Uri.parse('http://localhost:8080/signup'),
-        headers: requestHeaders, body: jsonEncode(user.toMap()));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      return response;
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load album');
-    }
   }
 }

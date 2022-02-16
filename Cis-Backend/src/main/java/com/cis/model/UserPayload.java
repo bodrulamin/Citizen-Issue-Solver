@@ -1,7 +1,5 @@
 package com.cis.model;
 
-
-
 public class UserPayload {
 		String username;
 		String password;

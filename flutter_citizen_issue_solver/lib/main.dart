@@ -1,12 +1,13 @@
-
 import 'package:citizen_issue_solver_flutter/local_storage/sharedpref.dart';
+import 'package:citizen_issue_solver_flutter/screens/issue_feed.dart';
+import 'package:citizen_issue_solver_flutter/screens/login.dart';
 import 'package:flutter/material.dart';
 
 import 'models/user.dart';
 
 void main() {
   runApp(const MaterialApp(
-    home: LoginWrapper(),
+    home: LoginPage(),
   ));
 }
 
@@ -21,15 +22,10 @@ class _LoginWrapperState extends State<LoginWrapper> {
   late Future<User> _user;
 
   @override
-  Future<void> initState() async {
-
-
-    User u = LocalStorage.getLocalUser();
+  void initState() {
+    _user = LocalStorage.getLocalUser();
+    super.initState();
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +39,7 @@ class _LoginWrapperState extends State<LoginWrapper> {
               if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else {
-                return Text('data loaded ' + snapshot.data.toString());
+                return IssueFeed();
               }
           }
         });

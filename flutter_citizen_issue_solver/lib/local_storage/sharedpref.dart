@@ -11,8 +11,8 @@ class LocalStorage {
   }
 
 
- static User getLocalUser() {
-    String userPref = _prefs.then((value) => value.getString('user')) as String;
+ static Future<User> getLocalUser() async {
+    String userPref = await _prefs.then((value) => value.getString('user')) as String;
     return jsonDecode(userPref);
   }
 }
