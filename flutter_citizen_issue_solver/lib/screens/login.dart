@@ -16,7 +16,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const RegistrationBody(),
+      body: LoginBody(),
       appBar: AppBar(
         title: const Text("Citizen Issue Solver"),
       ),
@@ -24,14 +24,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
 }
 
-class RegistrationBody extends StatefulWidget {
-  const RegistrationBody({Key? key}) : super(key: key);
+class LoginBody extends StatefulWidget {
+  const LoginBody({Key? key}) : super(key: key);
 
   @override
-  _RegistrationBodyState createState() => _RegistrationBodyState();
+  _LoginBodyState createState() => _LoginBodyState();
 }
 
-class _RegistrationBodyState extends State<RegistrationBody> {
+class _LoginBodyState extends State<LoginBody> {
   var usertypes = ["citizen", "provider"];
 
   var selectedUserType;

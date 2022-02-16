@@ -1,7 +1,8 @@
-import 'package:citizen_issue_solver_flutter/models/user.dart';
-import 'package:citizen_issue_solver_flutter/screens/registration.dart';
+
+import 'package:citizen_issue_solver_flutter/local_storage/sharedpref.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'models/user.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -17,26 +18,24 @@ class LoginWrapper extends StatefulWidget {
 }
 
 class _LoginWrapperState extends State<LoginWrapper> {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  late Future<String> _user;
+  late Future<User> _user;
 
   @override
-  void initState() {
+  Future<void> initState() async {
 
-    _prefs.then((value) => value.setString('user', 'this is user'));
-    
-    super.initState();
 
-    _user = _prefs.then((SharedPreferences prefs) {
-      return prefs.getString('user') ?? '';
-    });
+    User u = LocalStorage.getLocalUser();
   }
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
-
-    return FutureBuilder<String>(
+    return FutureBuilder<User>(
         future: _user,
-        builder:(context, snapshot) {
+        builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return const CircularProgressIndicator();
@@ -44,12 +43,9 @@ class _LoginWrapperState extends State<LoginWrapper> {
               if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else {
-                return Text(
-                  'data loaded ' + snapshot.data.toString());
-
+                return Text('data loaded ' + snapshot.data.toString());
               }
           }
-        }
-    );
+        });
   }
 }
