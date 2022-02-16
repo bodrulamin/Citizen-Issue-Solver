@@ -47,6 +47,7 @@ class _RegistrationBodyState extends State<RegistrationBody> {
 
   @override
   Widget build(BuildContext context) {
+    var labelText2 = "Username";
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -54,8 +55,8 @@ class _RegistrationBodyState extends State<RegistrationBody> {
           const Text("Registration"),
           TextFormField(
             controller: _usernameController,
-            decoration: const InputDecoration(
-              labelText: "Username",
+            decoration:  InputDecoration(
+              labelText: labelText2,
             ),
           ),
           TextFormField(

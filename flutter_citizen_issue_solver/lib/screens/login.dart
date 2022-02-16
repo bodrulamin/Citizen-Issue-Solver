@@ -44,26 +44,19 @@ class _LoginBodyState extends State<LoginBody> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  var username = "Username";
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          const Text("Registration"),
-          TextFormField(
-            controller: _usernameController,
-            decoration: const InputDecoration(
-              labelText: "Username",
-            ),
-          ),
-          TextFormField(
-            controller: _passwordController,
-            obscureText: true,
-            decoration: const InputDecoration(
-              labelText: "Password",
-            ),
-          ),
+          const Text("Login"),
+
+          TextBox(controller: _usernameController, label: "Username"),
+          TextBox(controller: _passwordController, label: "Password"),
+
           const Text("Select UserType"),
           DropdownButtonFormField(
             items: usertypes.map((String usertype) {
@@ -88,7 +81,9 @@ class _LoginBodyState extends State<LoginBody> {
                       usertype: selectedUserType);
 
                   signIn(user).then((res) {
-                    ApiResponse  apires = ApiResponse.fromMap(jsonDecode(res.body)) ;
+
+                  ApiResponse apires = ApiResponse.fromMap(jsonDecode(res.body));
+
                     SnackBar snackBar = SnackBar(
                       content: Text(apires.msg),
                     );
@@ -113,6 +108,31 @@ class _LoginBodyState extends State<LoginBody> {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class TextBox extends StatelessWidget {
+  const TextBox({
+    Key? key,
+    required TextEditingController controller,
+    required this.label,
+  }) : _usernameController = controller, super(key: key);
+
+  final TextEditingController _usernameController;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextFormField(
+        controller: _usernameController,
+        decoration:  InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: label,
+        ),
       ),
     );
   }
