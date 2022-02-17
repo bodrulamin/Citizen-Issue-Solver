@@ -5,6 +5,7 @@ import 'package:citizen_issue_solver_flutter/models/user_payload.dart';
 import 'package:citizen_issue_solver_flutter/networks/user_ops.dart';
 import 'package:citizen_issue_solver_flutter/screens/issue_feed.dart';
 import 'package:citizen_issue_solver_flutter/screens/registration.dart';
+import 'package:citizen_issue_solver_flutter/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -44,7 +45,6 @@ class _LoginBodyState extends State<LoginBody> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  var username = "Username";
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +53,8 @@ class _LoginBodyState extends State<LoginBody> {
       child: Column(
         children: [
           const Text("Login"),
-
           TextBox(controller: _usernameController, label: "Username"),
           TextBox(controller: _passwordController, label: "Password"),
-
           const Text("Select UserType"),
           DropdownButtonFormField(
             items: usertypes.map((String usertype) {
@@ -81,58 +79,30 @@ class _LoginBodyState extends State<LoginBody> {
                       usertype: selectedUserType);
 
                   signIn(user).then((res) {
-
-                  ApiResponse apires = ApiResponse.fromMap(jsonDecode(res.body));
+                    ApiResponse apires =
+                        ApiResponse.fromMap(jsonDecode(res.body));
 
                     SnackBar snackBar = SnackBar(
                       content: Text(apires.msg),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    if(apires.status == 'success'){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>IssueFeed()));
+                    if (apires.status == 'success') {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => IssueFeed()));
                     }
                   });
-
-
-
-
                 },
                 child: const Text('Login'),
               ),
               TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => RegistrationPage()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => RegistrationPage()));
                   },
                   child: Text('New user? Sign Up here'))
             ],
           )
         ],
-      ),
-    );
-  }
-}
-
-class TextBox extends StatelessWidget {
-  const TextBox({
-    Key? key,
-    required TextEditingController controller,
-    required this.label,
-  }) : _usernameController = controller, super(key: key);
-
-  final TextEditingController _usernameController;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        controller: _usernameController,
-        decoration:  InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: label,
-        ),
       ),
     );
   }
