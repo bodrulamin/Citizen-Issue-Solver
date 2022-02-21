@@ -12,20 +12,10 @@ Future<http.Response> getIssues() async {
   final response = await http.get(Uri.parse(shoutGetAllApi),
       headers: requestHeaders );
 
-  if (response.statusCode == 200) {
+
     return response;
-  } else {
-    throw Exception('Failed to load album');
-  }
+
+
 }
 
-Future<http.Response> signIn(UserPayload user) async {
-  final response = await http.post(Uri.parse(signinApi),
-      headers: requestHeaders, body: jsonEncode(user.toMap()));
 
-  if (response.statusCode == 200) {
-    return response;
-  } else {
-    throw Exception('Failed to load album');
-  }
-}

@@ -1,43 +1,38 @@
 package com.cis.model;
-
 import javax.persistence.*;
 
 @Entity
 public class Category {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    long id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	long id;
-	
-	@Column(unique = true, nullable = false)
-	String name;
-	
-	  
- 	
-	public Category() {
-	 
-	}
+    @Column(unique = true, nullable = false)
+    String name;
 
-	public long getId() {
-		return id;
-	}
+    public Category() {
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public Category(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public Category(long id, String name) {
- 		this.id = id;
-		this.name = name;
-	}
-	
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

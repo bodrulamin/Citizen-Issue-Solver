@@ -1,23 +1,23 @@
 
 class User{
-  String username;
-  String password;
-  String usertype;
-  String address;
-  String phone;
-  String email;
-  String fullname;
+  String? username;
+  String? password;
+  String? usertype;
+  String? address;
+  String? phone;
+  String? email;
+  String? fullname;
 
 //<editor-fold desc="Data Methods">
 
   User({
-    required this.username,
-    required this.password,
-    required this.usertype,
-    required this.address,
-    required this.phone,
-    required this.email,
-    required this.fullname,
+     this.username,
+     this.password,
+     this.usertype,
+     this.address,
+     this.phone,
+     this.email,
+     this.fullname,
   });
 
   @override

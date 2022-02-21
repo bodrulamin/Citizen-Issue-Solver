@@ -1,13 +1,30 @@
-import 'package:citizen_issue_solver_flutter/local_storage/sharedpref.dart';
+import 'dart:convert';
+
+import 'package:citizen_issue_solver_flutter/constant/routs.dart';
 import 'package:citizen_issue_solver_flutter/screens/issue_feed.dart';
 import 'package:citizen_issue_solver_flutter/screens/login.dart';
+import 'package:citizen_issue_solver_flutter/screens/registration.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 
+import 'local_storage/localops.dart';
 import 'models/user.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    home: LoginPage(),
+  runApp( MaterialApp(
+
+    initialRoute: Routes.loginWrapper,
+    routes: {
+
+      Routes.loginWrapper : (context)  => const LoginWrapper(),
+      Routes.login : (context)  => const LoginPage(),
+      Routes.registration: (context)  => const RegistrationPage(),
+      Routes.shouts : (context)  => const IssueFeed(),
+
+    },
+
+
+    debugShowCheckedModeBanner: false,
   ));
 }
 
@@ -19,29 +36,46 @@ class LoginWrapper extends StatefulWidget {
 }
 
 class _LoginWrapperState extends State<LoginWrapper> {
-  late Future<User> _user;
+
+   User? user = User();
 
   @override
   void initState() {
-    _user = LocalStorage.getLocalUser();
+
     super.initState();
+  }
+
+
+  _clearStorage() async {
+    await storage.clear();
+
+    setState(() {
+      user = storage.getItem('user') ?? "{}";
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<User>(
-        future: _user,
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return const CircularProgressIndicator();
-            default:
-              if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else {
-                return IssueFeed();
-              }
-          }
-        });
+
+    return FutureBuilder(
+      future: storage.ready,
+      builder: (BuildContext context, snapshot) {
+        if (snapshot.data == true) {
+
+          String? userString = storage.getItem("user");
+
+
+           if(userString == null) {
+         //    user = User.fromMap(jsonDecode(userString!)) ;
+
+             return const LoginPage();
+           }
+
+         return const IssueFeed();
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
+    );
   }
 }

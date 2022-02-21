@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
+import '../constant/routs.dart';
 import '../models/user.dart';
 import 'issue_feed.dart';
 
@@ -112,7 +113,9 @@ class _RegistrationBodyState extends State<RegistrationBody> {
 
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     if(apires.status == 'success'){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>IssueFeed()));
+                      Navigator.pushReplacementNamed(context, Routes.shouts);
+
+
                     }
                   });
                 },

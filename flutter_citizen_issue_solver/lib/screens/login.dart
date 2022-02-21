@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+
+import 'package:citizen_issue_solver_flutter/constant/routs.dart';
+import 'package:citizen_issue_solver_flutter/local_storage/localops.dart';
 import 'package:citizen_issue_solver_flutter/models/api_res.dart';
 import 'package:citizen_issue_solver_flutter/models/user_payload.dart';
 import 'package:citizen_issue_solver_flutter/networks/user_ops.dart';
@@ -82,22 +85,27 @@ class _LoginBodyState extends State<LoginBody> {
                     ApiResponse apires =
                         ApiResponse.fromMap(jsonDecode(res.body));
 
+                    User loggedInUser = User.fromMap(apires.data['user']);
+
                     SnackBar snackBar = SnackBar(
                       content: Text(apires.msg),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     if (apires.status == 'success') {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => IssueFeed()));
+                      saveToStorage(loggedInUser);
+                     Navigator.pushReplacementNamed(context, Routes.shouts);
+
                     }
                   });
                 },
                 child: const Text('Login'),
               ),
+
               TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RegistrationPage()));
+
+
+
                   },
                   child: Text('New user? Sign Up here'))
             ],
