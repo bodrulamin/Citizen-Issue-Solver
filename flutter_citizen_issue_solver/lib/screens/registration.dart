@@ -22,7 +22,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const RegistrationBody(),
+      body:  const SingleChildScrollView(child: RegistrationBody()),
       appBar: AppBar(
         title: const Text("Citizen Issue Solver"),
       ),
@@ -123,8 +123,8 @@ class _RegistrationBodyState extends State<RegistrationBody> {
               ),
               TextButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => LoginPage()));
+                    Navigator.pushReplacementNamed(context, Routes.login);
+
                   },
                   child: Text('Already a user? Sign in here'))
             ],

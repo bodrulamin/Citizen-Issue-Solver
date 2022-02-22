@@ -6,11 +6,8 @@ import 'package:citizen_issue_solver_flutter/local_storage/localops.dart';
 import 'package:citizen_issue_solver_flutter/models/api_res.dart';
 import 'package:citizen_issue_solver_flutter/models/user_payload.dart';
 import 'package:citizen_issue_solver_flutter/networks/user_ops.dart';
-import 'package:citizen_issue_solver_flutter/screens/issue_feed.dart';
-import 'package:citizen_issue_solver_flutter/screens/registration.dart';
 import 'package:citizen_issue_solver_flutter/widgets/text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import '../models/user.dart';
 
@@ -25,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LoginBody(),
+      body: const SingleChildScrollView(child: LoginBody()),
       appBar: AppBar(
         title: const Text("Citizen Issue Solver"),
       ),
@@ -104,7 +101,7 @@ class _LoginBodyState extends State<LoginBody> {
               TextButton(
                   onPressed: () {
 
-
+Navigator.pushReplacementNamed(context, Routes.registration);
 
                   },
                   child: Text('New user? Sign Up here'))
