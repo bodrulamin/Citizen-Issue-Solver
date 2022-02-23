@@ -1,9 +1,7 @@
-
-class UserPayload{
+class UserPayload {
   String username;
   String password;
   String usertype;
-
 
 //<editor-fold desc="Data Methods">
 
@@ -11,7 +9,6 @@ class UserPayload{
     required this.username,
     required this.password,
     required this.usertype,
- 
   });
 
   @override
@@ -21,14 +18,10 @@ class UserPayload{
           runtimeType == other.runtimeType &&
           username == other.username &&
           password == other.password &&
-          usertype == other.usertype
-         );
+          usertype == other.usertype);
 
   @override
-  int get hashCode =>
-      username.hashCode ^
-      password.hashCode ^
-      usertype.hashCode ;
+  int get hashCode => username.hashCode ^ password.hashCode ^ usertype.hashCode;
 
   @override
   String toString() {
@@ -36,20 +29,18 @@ class UserPayload{
         ' username: $username,' +
         ' password: $password,' +
         ' usertype: $usertype,' +
-               '}';
+        '}';
   }
 
   UserPayload copyWith({
     String? username,
     String? password,
     String? usertype,
-   
   }) {
     return UserPayload(
       username: username ?? this.username,
       password: password ?? this.password,
       usertype: usertype ?? this.usertype,
-     
     );
   }
 
@@ -58,7 +49,6 @@ class UserPayload{
       'username': this.username,
       'password': this.password,
       'usertype': this.usertype,
-     
     };
   }
 
@@ -67,7 +57,6 @@ class UserPayload{
       username: map['username'] as String,
       password: map['password'] as String,
       usertype: map['usertype'] as String,
-     
     );
   }
 

@@ -1,4 +1,3 @@
-
 import 'dart:core';
 
 class Shout {
@@ -9,7 +8,7 @@ class Shout {
   String shoutTitle;
   String shoutmessage;
   String address;
-  String status ;
+  String status;
   DateTime? date;
   String photo;
 
@@ -124,7 +123,7 @@ class Shout {
       shoutmessage: map['shoutmessage'] as String,
       address: map['address'] as String,
       status: map['status'] as String,
-      date: DateTime.tryParse( map['date']),
+      date: DateTime.tryParse(map['date']),
       photo: map['photo'] as String,
     );
   }

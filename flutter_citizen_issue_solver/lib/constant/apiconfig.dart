@@ -8,7 +8,6 @@ const userDeleteApi = host + "/user/delete";
 const userGetAllApi = host + "/user/getAll";
 const userGetOneApi = host + "/user/getOne/";
 
-
 const categoryAddApi = host + "/category/add";
 const categoryUpdateApi = host + "/category/update";
 const categoryDeleteApi = host + "/category/delete";

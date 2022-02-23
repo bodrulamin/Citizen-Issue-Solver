@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class TextBox extends StatelessWidget {
@@ -17,10 +16,9 @@ class TextBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        obscureText: label=='Password',
+        obscureText: label == 'Password',
         controller: _usernameController,
         decoration: InputDecoration(
-
           border: OutlineInputBorder(),
           labelText: label,
         ),

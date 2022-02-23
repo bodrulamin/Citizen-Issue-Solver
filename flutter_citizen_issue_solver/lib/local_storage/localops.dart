@@ -1,10 +1,8 @@
-
 import 'dart:convert';
 
 import 'package:localstorage/localstorage.dart';
 
 import '../models/user.dart';
-
 
 final LocalStorage storage = LocalStorage('cis');
 

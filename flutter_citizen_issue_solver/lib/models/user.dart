@@ -1,5 +1,4 @@
-
-class User{
+class User {
   String? username;
   String? password;
   String? usertype;
@@ -11,13 +10,13 @@ class User{
 //<editor-fold desc="Data Methods">
 
   User({
-     this.username,
-     this.password,
-     this.usertype,
-     this.address,
-     this.phone,
-     this.email,
-     this.fullname,
+    this.username,
+    this.password,
+    this.usertype,
+    this.address,
+    this.phone,
+    this.email,
+    this.fullname,
   });
 
   @override

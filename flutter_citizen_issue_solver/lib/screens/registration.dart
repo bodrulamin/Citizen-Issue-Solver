@@ -2,15 +2,11 @@ import 'dart:convert';
 
 import 'package:citizen_issue_solver_flutter/models/api_res.dart';
 import 'package:citizen_issue_solver_flutter/networks/user_ops.dart';
-import 'package:citizen_issue_solver_flutter/screens/login.dart';
 import 'package:citizen_issue_solver_flutter/widgets/text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 
 import '../constant/routs.dart';
 import '../models/user.dart';
-import 'issue_feed.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -84,7 +80,7 @@ class _RegistrationBodyState extends State<RegistrationBody> {
 
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     if (apires.status == 'success') {
-                      Navigator.pushReplacementNamed(context, Routes.shouts);
+                      Navigator.pushReplacementNamed(context, Routes.dashboard);
                     }
                   });
                 },

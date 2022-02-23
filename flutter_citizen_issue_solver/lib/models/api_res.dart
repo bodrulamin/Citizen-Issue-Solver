@@ -1,5 +1,3 @@
-
-
 class ApiResponse {
   String msg = "Empty message";
   Map<String, dynamic> data;

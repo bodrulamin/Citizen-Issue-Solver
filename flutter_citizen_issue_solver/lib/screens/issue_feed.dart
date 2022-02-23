@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:citizen_issue_solver_flutter/main.dart';
 import 'package:citizen_issue_solver_flutter/models/api_res.dart';
 import 'package:citizen_issue_solver_flutter/models/shout.dart';
 import 'package:citizen_issue_solver_flutter/networks/issue.dart';
@@ -31,27 +30,21 @@ class _IssueFeedState extends State<IssueFeed> {
                   await clearStorage();
 
                   Navigator.pushReplacementNamed(context, Routes.loginWrapper);
-
                 },
                 child: const Icon(
                   Icons.logout,
                   size: 26.0,
                 ),
-              )
-          ),
+              )),
           Padding(
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {},
-                child: const Icon(
-                    Icons.more_vert
-                ),
-              )
-          ),
+                child: const Icon(Icons.more_vert),
+              )),
         ],
       ),
       body: IssueBody(),
-
     );
   }
 }
@@ -64,21 +57,19 @@ class IssueBody extends StatefulWidget {
 }
 
 class _IssueBodyState extends State<IssueBody> {
-
   List<Shout> shouts = [];
 
-
   @override
-  void initState()  {
-
-   getIssues().then((res) {
+  void initState() {
+    getIssues().then((res) {
       print(res.body);
 
-      ApiResponse apiResponse = ApiResponse.fromMap(jsonDecode(res.body)) ;
+      ApiResponse apiResponse = ApiResponse.fromMap(jsonDecode(res.body));
 
       setState(() {
-        shouts=(apiResponse.data['shout'] as List).map((i) =>
-            Shout.fromMap(i)).toList();
+        shouts = (apiResponse.data['shout'] as List)
+            .map((i) => Shout.fromMap(i))
+            .toList();
       });
     });
 
@@ -88,16 +79,15 @@ class _IssueBodyState extends State<IssueBody> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemBuilder: itemBuilder,
+      itemBuilder: itemBuilder,
       itemCount: shouts.length,
-
     );
   }
 
   Widget itemBuilder(BuildContext context, int index) {
     return Card(
       elevation: 5,
-      margin: EdgeInsets.all(8) ,
+      margin: EdgeInsets.all(8),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -109,14 +99,12 @@ class _IssueBodyState extends State<IssueBody> {
                 color: Theme.of(context).colorScheme.error,
               ),
             ),
-            Text(shouts[index].shoutmessage ),
-
+            Text(shouts[index].shoutmessage),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(onPressed: (){}, child: Text("Edit")),
-                TextButton(onPressed: (){}, child: Text("delete")),
-
+                TextButton(onPressed: () {}, child: Text("Edit")),
+                TextButton(onPressed: () {}, child: Text("delete")),
               ],
             )
           ],

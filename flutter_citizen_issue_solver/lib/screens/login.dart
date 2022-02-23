@@ -37,7 +37,7 @@ class LoginBody extends StatefulWidget {
 }
 
 class _LoginBodyState extends State<LoginBody> {
-  var usertypes = ["select usertype","citizen", "provider"];
+  var usertypes = ["select usertype", "citizen", "provider"];
 
   var selectedUserType;
 
@@ -75,7 +75,7 @@ class _LoginBodyState extends State<LoginBody> {
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     if (apires.status == 'success') {
                       saveToStorage(loggedInUser);
-                      Navigator.pushReplacementNamed(context, Routes.shouts);
+                      Navigator.pushReplacementNamed(context, Routes.dashboard);
                     }
                   });
                 },
@@ -96,21 +96,21 @@ class _LoginBodyState extends State<LoginBody> {
 
   Padding DropdownUsertype() {
     return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: DropdownButtonFormField<String>(
-            decoration: InputDecoration(border: OutlineInputBorder()),
-            items: usertypes.map((String usertype) {
-              return DropdownMenuItem<String>(
-                value: usertype,
-                child: Text(usertype),
-              );
-            }).toList(),
-            onChanged: (newValue) {
-              // do other stuff with _category
-              setState(() => selectedUserType = newValue);
-            },
-            value: selectedUserType?? usertypes[0],
-          ),
-        );
+      padding: const EdgeInsets.all(8.0),
+      child: DropdownButtonFormField<String>(
+        decoration: InputDecoration(border: OutlineInputBorder()),
+        items: usertypes.map((String usertype) {
+          return DropdownMenuItem<String>(
+            value: usertype,
+            child: Text(usertype),
+          );
+        }).toList(),
+        onChanged: (newValue) {
+          // do other stuff with _category
+          setState(() => selectedUserType = newValue);
+        },
+        value: selectedUserType ?? usertypes[0],
+      ),
+    );
   }
 }
