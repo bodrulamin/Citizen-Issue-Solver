@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:citizen_issue_solver_flutter/models/api_res.dart';
 import 'package:citizen_issue_solver_flutter/networks/user_ops.dart';
 import 'package:citizen_issue_solver_flutter/screens/login.dart';
+import 'package:citizen_issue_solver_flutter/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -22,7 +23,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  const SingleChildScrollView(child: RegistrationBody()),
+      body: const SingleChildScrollView(child: RegistrationBody()),
       appBar: AppBar(
         title: const Text("Citizen Issue Solver"),
       ),
@@ -54,41 +55,10 @@ class _RegistrationBodyState extends State<RegistrationBody> {
       child: Column(
         children: [
           const Text("Registration"),
-          TextFormField(
-            controller: _usernameController,
-            decoration:  InputDecoration(
-              labelText: labelText2,
-            ),
-          ),
-          TextFormField(
-            controller: _passwordController,
-            obscureText: true,
-            decoration: const InputDecoration(
-              labelText: "Password",
-            ),
-          ),
-          const Text("Select UserType"),
-          DropdownButtonFormField(
-            items: usertypes.map((String usertype) {
-              return DropdownMenuItem(
-                value: usertype,
-                child: Text(usertype),
-              );
-            }).toList(),
-            onChanged: (newValue) {
-              // do other stuff with _category
-              setState(() => selectedUserType = newValue);
-            },
-            value: selectedUserType,
-          ),
-          TextFormField(
-            controller: _addressController,
-            maxLines: null,
-            keyboardType: TextInputType.multiline,
-            decoration: const InputDecoration(
-                // labelText: "Address",
-                ),
-          ),
+          TextBox(controller: _usernameController, label: "Username"),
+          TextBox(controller: _passwordController, label: "Password"),
+          DropdownUsertype(),
+          TextBox(controller: _addressController, label: "Address "),
           Column(
             children: [
               ElevatedButton(
@@ -105,17 +75,16 @@ class _RegistrationBodyState extends State<RegistrationBody> {
                   print(user);
                   signUp(user).then((res) {
                     print(res.body);
-                    ApiResponse apires = ApiResponse.fromMap(jsonDecode(res.body)) ;
+                    ApiResponse apires =
+                        ApiResponse.fromMap(jsonDecode(res.body));
 
                     SnackBar snackBar = SnackBar(
                       content: Text(apires.msg),
                     );
 
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    if(apires.status == 'success'){
+                    if (apires.status == 'success') {
                       Navigator.pushReplacementNamed(context, Routes.shouts);
-
-
                     }
                   });
                 },
@@ -124,12 +93,31 @@ class _RegistrationBodyState extends State<RegistrationBody> {
               TextButton(
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, Routes.login);
-
                   },
                   child: Text('Already a user? Sign in here'))
             ],
           )
         ],
+      ),
+    );
+  }
+
+  Padding DropdownUsertype() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: DropdownButtonFormField<String>(
+        decoration: InputDecoration(border: OutlineInputBorder()),
+        items: usertypes.map((String usertype) {
+          return DropdownMenuItem<String>(
+            value: usertype,
+            child: Text(usertype),
+          );
+        }).toList(),
+        onChanged: (newValue) {
+          // do other stuff with _category
+          setState(() => selectedUserType = newValue);
+        },
+        value: selectedUserType ?? usertypes[0],
       ),
     );
   }

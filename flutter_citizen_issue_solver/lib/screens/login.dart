@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:citizen_issue_solver_flutter/constant/routs.dart';
 import 'package:citizen_issue_solver_flutter/local_storage/localops.dart';
 import 'package:citizen_issue_solver_flutter/models/api_res.dart';
@@ -38,13 +37,12 @@ class LoginBody extends StatefulWidget {
 }
 
 class _LoginBodyState extends State<LoginBody> {
-  var usertypes = ["citizen", "provider"];
+  var usertypes = ["select usertype","citizen", "provider"];
 
   var selectedUserType;
 
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,20 +53,7 @@ class _LoginBodyState extends State<LoginBody> {
           const Text("Login"),
           TextBox(controller: _usernameController, label: "Username"),
           TextBox(controller: _passwordController, label: "Password"),
-          const Text("Select UserType"),
-          DropdownButtonFormField(
-            items: usertypes.map((String usertype) {
-              return DropdownMenuItem(
-                value: usertype,
-                child: Text(usertype),
-              );
-            }).toList(),
-            onChanged: (newValue) {
-              // do other stuff with _category
-              setState(() => selectedUserType = newValue);
-            },
-            value: selectedUserType,
-          ),
+          DropdownUsertype(),
           Column(
             children: [
               ElevatedButton(
@@ -90,25 +75,42 @@ class _LoginBodyState extends State<LoginBody> {
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     if (apires.status == 'success') {
                       saveToStorage(loggedInUser);
-                     Navigator.pushReplacementNamed(context, Routes.shouts);
-
+                      Navigator.pushReplacementNamed(context, Routes.shouts);
                     }
                   });
                 },
                 child: const Text('Login'),
               ),
-
               TextButton(
                   onPressed: () {
-
-Navigator.pushReplacementNamed(context, Routes.registration);
-
+                    Navigator.pushReplacementNamed(
+                        context, Routes.registration);
                   },
-                  child: Text('New user? Sign Up here'))
+                  child: const Text('New user? Sign Up here'))
             ],
           )
         ],
       ),
     );
+  }
+
+  Padding DropdownUsertype() {
+    return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: DropdownButtonFormField<String>(
+            decoration: InputDecoration(border: OutlineInputBorder()),
+            items: usertypes.map((String usertype) {
+              return DropdownMenuItem<String>(
+                value: usertype,
+                child: Text(usertype),
+              );
+            }).toList(),
+            onChanged: (newValue) {
+              // do other stuff with _category
+              setState(() => selectedUserType = newValue);
+            },
+            value: selectedUserType?? usertypes[0],
+          ),
+        );
   }
 }
