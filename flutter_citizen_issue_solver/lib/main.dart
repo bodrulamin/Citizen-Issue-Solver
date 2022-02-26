@@ -1,5 +1,5 @@
 import 'package:citizen_issue_solver_flutter/constant/routs.dart';
-import 'package:citizen_issue_solver_flutter/screens/dashboard.dart';
+import 'package:citizen_issue_solver_flutter/screens/home.dart';
 import 'package:citizen_issue_solver_flutter/screens/issue_feed.dart';
 import 'package:citizen_issue_solver_flutter/screens/login.dart';
 import 'package:citizen_issue_solver_flutter/screens/registration.dart';
@@ -10,12 +10,12 @@ import 'models/user.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: Routes.loginWrapper,
+    initialRoute: Routes.dashboard,
     routes: {
       Routes.loginWrapper: (context) => const LoginWrapper(),
       Routes.login: (context) => const LoginPage(),
       Routes.registration: (context) => const RegistrationPage(),
-      Routes.dashboard: (context) =>  Dashboard( title:'Title'),
+      Routes.dashboard: (context) =>  HomePage( ),
       Routes.shouts: (context) => const IssueFeed(),
     },
     debugShowCheckedModeBanner: false,
@@ -59,7 +59,7 @@ class _LoginWrapperState extends State<LoginWrapper> {
             return const LoginPage();
           }
 
-          return  Dashboard(title: 'Dashboard',);
+          return  HomePage();
         } else {
           return const CircularProgressIndicator();
         }

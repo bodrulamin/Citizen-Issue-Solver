@@ -50,7 +50,14 @@ class _LoginBodyState extends State<LoginBody> {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          const Text("Login"),
+          const Text(
+            "Login",
+            style: TextStyle(
+                fontSize: 25,
+                fontFamily: "RobotoMono",
+                fontWeight: FontWeight.bold,
+                color: Colors.blue),
+          ),
           TextBox(controller: _usernameController, label: "Username"),
           TextBox(controller: _passwordController, label: "Password"),
           DropdownUsertype(),

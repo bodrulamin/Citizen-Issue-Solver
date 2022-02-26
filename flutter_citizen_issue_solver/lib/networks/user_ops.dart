@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:citizen_issue_solver_flutter/constant/apiconfig.dart';
 import 'package:citizen_issue_solver_flutter/models/user.dart';
 import 'package:citizen_issue_solver_flutter/models/user_payload.dart';
