@@ -25,38 +25,42 @@ class _HomePageState extends State<HomePage> {
           title: Text(HomePage.title),
         ),
         body: pages[_currentIndex],
-        bottomNavigationBar: SalomonBottomBar(
-          currentIndex: _currentIndex,
-          onTap: (i) => setState(() => _currentIndex = i),
-          items: [
-            /// Home
-            SalomonBottomBarItem(
-              icon: Icon(Icons.home),
-              title: Text("Dashboard"),
-              selectedColor: Colors.purple,
-            ),
+        bottomNavigationBar: Container(
 
-            /// Likes
-            SalomonBottomBarItem(
-              icon: Icon(Icons.favorite_border),
-              title: Text("Issues"),
-              selectedColor: Colors.pink,
-            ),
+          child: SalomonBottomBar(
+            itemShape: StadiumBorder(),
+            currentIndex: _currentIndex,
+            onTap: (i) => setState(() => _currentIndex = i),
+            items: [
+              /// Home
+              SalomonBottomBarItem(
+                icon: Icon(Icons.home),
+                title: Text("Dashboard"),
+                selectedColor: Colors.purple,
+              ),
 
-            /// Search
-            SalomonBottomBarItem(
-              icon: Icon(Icons.search),
-              title: Text("Search"),
-              selectedColor: Colors.orange,
-            ),
+              /// Likes
+              SalomonBottomBarItem(
+                icon: Icon(Icons.favorite_border),
+                title: Text("Issues"),
+                selectedColor: Colors.pink,
+              ),
 
-            /// Profile
-            SalomonBottomBarItem(
-              icon: Icon(Icons.person),
-              title: Text("Profile"),
-              selectedColor: Colors.teal,
-            ),
-          ],
+              /// Search
+              SalomonBottomBarItem(
+                icon: Icon(Icons.search),
+                title: Text("Search"),
+                selectedColor: Colors.orange,
+              ),
+
+              /// Profile
+              SalomonBottomBarItem(
+                icon: Icon(Icons.person),
+                title: Text("Profile"),
+                selectedColor: Colors.teal,
+              ),
+            ],
+          ),
         ),
       ),
     );
