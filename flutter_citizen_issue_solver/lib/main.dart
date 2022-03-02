@@ -3,6 +3,7 @@ import 'package:citizen_issue_solver_flutter/screens/home.dart';
 import 'package:citizen_issue_solver_flutter/screens/issue_feed.dart';
 import 'package:citizen_issue_solver_flutter/screens/login.dart';
 import 'package:citizen_issue_solver_flutter/screens/registration.dart';
+import 'package:citizen_issue_solver_flutter/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'local_storage/localops.dart';
@@ -15,9 +16,13 @@ void main() {
       Routes.root: (context) => const LoginWrapper(),
       Routes.login: (context) => const LoginPage(),
       Routes.registration: (context) => const RegistrationPage(),
-      Routes.dashboard: (context) =>  HomePage( ),
+      Routes.home: (context) =>  HomePage( ),
       Routes.shouts: (context) => const IssueFeed(),
     },
+    theme: ThemeData(
+      primarySwatch: colorSwatch,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+    ),
     debugShowCheckedModeBanner: false,
   ));
 }

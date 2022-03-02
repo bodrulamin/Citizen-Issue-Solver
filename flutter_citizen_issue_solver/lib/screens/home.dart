@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../constant/routs.dart';
+import '../local_storage/localops.dart';
+import '../theme/colors.dart';
 import '../widgets/drawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,21 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _currentIndex = 0;
-  static const MaterialColor blue = MaterialColor(
-    0xFF6777EF,
-    <int, Color>{
-      50: Color(0xFFE3F2FD),
-      100: Color(0xFFBBC2F3),
-      200: Color(0xFF98A3F1),
-      300: Color(0xFF8793EA),
-      400: Color(0xFF7683E7),
-      500: Color(0xFF6777EF),
-      600: Color(0xFF5A6BEA),
-      700: Color(0xFF4859D5),
-      800: Color(0xFF3D4DC5),
-      900: Color(0xFF3242B6),
-    },
-  );
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +29,34 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       title: HomePage.title,
       theme: ThemeData(
-        primarySwatch: blue,
+        primarySwatch: colorSwatch,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
         appBar: AppBar(
           title: Text(HomePage.title),
+          actions: [
+            Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () async {
+                    await clearStorage();
+                    Navigator.pushReplacementNamed(context, Routes.root);
+                  },
+                  child: const Icon(
+                    Icons.logout,
+                    size: 26.0,
+                  ),
+                )),
+            Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: const Icon(Icons.more_vert),
+                )),
+          ],
         ),
+
         drawer: MyDrawer(context: context),
 
         body: pages[_currentIndex],

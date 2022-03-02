@@ -74,15 +74,14 @@ class _LoginBodyState extends State<LoginBody> {
                     ApiResponse apires =
                         ApiResponse.fromMap(jsonDecode(res.body));
 
-                    User loggedInUser = User.fromMap(apires.data['user']);
-
                     SnackBar snackBar = SnackBar(
                       content: Text(apires.msg),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     if (apires.status == 'success') {
+                      User loggedInUser = User.fromMap(apires.data['user']);
                       saveToStorage(loggedInUser);
-                      Navigator.pushReplacementNamed(context, Routes.dashboard);
+                      Navigator.pushReplacementNamed(context, Routes.home);
                     }
                   });
                 },

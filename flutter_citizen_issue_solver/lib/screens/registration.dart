@@ -80,7 +80,7 @@ class _RegistrationBodyState extends State<RegistrationBody> {
 
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     if (apires.status == 'success') {
-                      Navigator.pushReplacementNamed(context, Routes.dashboard);
+                      Navigator.pushReplacementNamed(context, Routes.home);
                     }
                   });
                 },
