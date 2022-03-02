@@ -13,7 +13,7 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, Long>{
 
 
-	User findByUsernameAndUsertype(String username, UserType userType);
+	List<User> findUsersByUsername(String username);
 
 	List<User> findAllByUsertype(UserType userType);
 

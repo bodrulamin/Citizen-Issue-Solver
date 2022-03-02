@@ -34,7 +34,7 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.home), title: Text("Home"),
             onTap: () {
               print("hl");
-              Navigator.pushNamed(this.context, Routes.shouts);
+              Navigator.pushNamed(this.context, Routes.home);
               // Navigator.pop(context);
             },
           ),

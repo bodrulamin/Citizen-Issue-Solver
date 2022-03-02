@@ -50,7 +50,16 @@ class _RegistrationBodyState extends State<RegistrationBody> {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          const Text("Registration"),
+          Image.asset("assets/images/registrationimage.jpg"),
+
+          const Text(
+            "Register Here",
+            style: TextStyle(
+                fontSize: 25,
+                fontFamily: "RobotoMono",
+                fontWeight: FontWeight.bold,
+                color: Colors.blue),
+          ),
           TextBox(controller: _usernameController, label: "Username"),
           TextBox(controller: _passwordController, label: "Password"),
           DropdownUsertype(),

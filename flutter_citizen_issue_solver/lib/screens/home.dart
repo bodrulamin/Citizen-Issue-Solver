@@ -1,4 +1,5 @@
 import 'package:citizen_issue_solver_flutter/screens/issue_feed.dart';
+import 'package:citizen_issue_solver_flutter/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -6,6 +7,7 @@ import '../constant/routs.dart';
 import '../local_storage/localops.dart';
 import '../theme/colors.dart';
 import '../widgets/drawer.dart';
+import 'dashboard.dart';
 
 class HomePage extends StatefulWidget {
   static const title = 'Citizen Issue Solver';
@@ -22,9 +24,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     List<Widget> pages = [
       const Dashboard(),
-      const Issues(),
-      const Search(),
-      const Profile()
+      const IssueBody(),
+      const Profile(),
+
     ];
     return MaterialApp(
       title: HomePage.title,
@@ -96,46 +98,4 @@ class _HomePageState extends State<HomePage> {
 
 
 
-class Dashboard extends StatelessWidget {
-  const Dashboard({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text("Dashboard")
-      ],
-    );
-  }
-}
-
-class Issues extends StatelessWidget {
-  const Issues({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IssueBody();
-  }
-}
-
-class Search extends StatelessWidget {
-  const Search({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [Text("Search")],
-    );
-  }
-}
-
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [Text("Profile")],
-    );
-  }
-}

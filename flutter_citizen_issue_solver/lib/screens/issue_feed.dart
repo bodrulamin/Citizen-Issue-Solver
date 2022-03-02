@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:citizen_issue_solver_flutter/constant/apiconfig.dart';
 import 'package:citizen_issue_solver_flutter/models/api_res.dart';
 import 'package:citizen_issue_solver_flutter/models/shout.dart';
 import 'package:citizen_issue_solver_flutter/networks/issue.dart';
@@ -47,31 +48,43 @@ class _IssueBodyState extends State<IssueBody> {
   }
 
   Widget itemBuilder(BuildContext context, int index) {
-    return Card(
-      elevation: 5,
-      margin: EdgeInsets.all(8),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Text(
-              shouts[index].shoutTitle,
-              style: TextStyle(
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.error,
+    return Column(
+      children: [
+        Card(
+          semanticContainer: true,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          child: Column(
+            children: [
+              Image.network(
+                shouts[index].photo.replaceAll('http://localhost:8080', host),
+                fit: BoxFit.fill,
               ),
-            ),
-            Text(shouts[index].shoutmessage),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(onPressed: () {}, child: Text("Edit")),
-                TextButton(onPressed: () {}, child: Text("delete")),
-              ],
-            )
-          ],
+
+              Text(
+                shouts[index].shoutTitle,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ),
+              Text(shouts[index].shoutmessage),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(onPressed: () {}, child: Text("Edit")),
+                  TextButton(onPressed: () {}, child: Text("delete")),
+                ],
+              )
+            ],
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          elevation: 5,
+          margin: EdgeInsets.all(10),
         ),
-      ),
+        
+      ],
     );
   }
 }

@@ -37,86 +37,63 @@ class LoginBody extends StatefulWidget {
 }
 
 class _LoginBodyState extends State<LoginBody> {
-  var usertypes = ["select usertype", "citizen", "provider"];
 
-  var selectedUserType;
 
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        children: [
-          const Text(
-            "Login",
-            style: TextStyle(
-                fontSize: 25,
-                fontFamily: "RobotoMono",
-                fontWeight: FontWeight.bold,
-                color: Colors.blue),
-          ),
-          TextBox(controller: _usernameController, label: "Username"),
-          TextBox(controller: _passwordController, label: "Password"),
-          DropdownUsertype(),
-          Column(
-            children: [
-              ElevatedButton(
+    return Column(
+      children: [
+        Image.asset("assets/images/loginimage.jpg"),
+        const Text(
+          "Login",
+          style: TextStyle(
+              fontSize: 25,
+              fontFamily: "RobotoMono",
+              fontWeight: FontWeight.bold,
+              color: Colors.blue),
+        ),
+        TextBox(controller: _usernameController, label: "Username"),
+        TextBox(controller: _passwordController, label: "Password"),
+        Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                UserPayload user = UserPayload(
+                    username: _usernameController.text,
+                    password: _passwordController.text,
+                   );
+
+                signIn(user).then((res) {
+                  ApiResponse apires =
+                      ApiResponse.fromMap(jsonDecode(res.body));
+
+                  SnackBar snackBar = SnackBar(
+                    content: Text(apires.msg),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  if (apires.status == 'success') {
+                    User loggedInUser = User.fromMap(apires.data['user']);
+                    saveToStorage(loggedInUser);
+                    Navigator.pushReplacementNamed(context, Routes.home);
+                  }
+                });
+              },
+              child: const Text('Login'),
+            ),
+            TextButton(
                 onPressed: () {
-                  UserPayload user = UserPayload(
-                      username: _usernameController.text,
-                      password: _passwordController.text,
-                      usertype: selectedUserType);
-
-                  signIn(user).then((res) {
-                    ApiResponse apires =
-                        ApiResponse.fromMap(jsonDecode(res.body));
-
-                    SnackBar snackBar = SnackBar(
-                      content: Text(apires.msg),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    if (apires.status == 'success') {
-                      User loggedInUser = User.fromMap(apires.data['user']);
-                      saveToStorage(loggedInUser);
-                      Navigator.pushReplacementNamed(context, Routes.home);
-                    }
-                  });
+                  Navigator.pushReplacementNamed(
+                      context, Routes.registration);
                 },
-                child: const Text('Login'),
-              ),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, Routes.registration);
-                  },
-                  child: const Text('New user? Sign Up here'))
-            ],
-          )
-        ],
-      ),
+                child: const Text('New user? Sign Up here'))
+          ],
+        )
+      ],
     );
   }
 
-  Padding DropdownUsertype() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: DropdownButtonFormField<String>(
-        decoration: InputDecoration(border: OutlineInputBorder()),
-        items: usertypes.map((String usertype) {
-          return DropdownMenuItem<String>(
-            value: usertype,
-            child: Text(usertype),
-          );
-        }).toList(),
-        onChanged: (newValue) {
-          // do other stuff with _category
-          setState(() => selectedUserType = newValue);
-        },
-        value: selectedUserType ?? usertypes[0],
-      ),
-    );
-  }
+
 }

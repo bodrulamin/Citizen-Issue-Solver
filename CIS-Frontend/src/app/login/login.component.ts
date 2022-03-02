@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   fg = new FormGroup({
     username: new FormControl("citizen", [Validators.pattern("[a-zA-Z0-9]{6,20}")]),
     password: new FormControl("citizen", [Validators.pattern("[a-zA-Z0-9]{6,20}")]),
-    usertype: new FormControl("", [Validators.required]),
 
 
   })
@@ -30,9 +29,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(ut: string) {
+  login() {
     console.log(this.fg.value);
-    this.fg.get('usertype')?.setValue(ut)
 
     this.userService.signin(this.fg).subscribe(res => {
       console.log(res);

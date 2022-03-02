@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class UserController {
@@ -54,7 +56,8 @@ public class UserController {
 	public ApiResponse sigin(@RequestBody UserPayload payload) throws Exception {
 
 		try {
-			User user = userRepository.findByUsernameAndUsertype(payload.getUsername(), payload.getUsertype());
+			List<User> users = userRepository.findUsersByUsername(payload.getUsername());
+			User user = users.get(0);
 			if (user == null)
 				throw new Exception(payload.getUsername() + " user not found !");
 

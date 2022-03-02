@@ -17,7 +17,7 @@ void main() {
       Routes.login: (context) => const LoginPage(),
       Routes.registration: (context) => const RegistrationPage(),
       Routes.home: (context) =>  HomePage( ),
-      Routes.shouts: (context) => const IssueFeed(),
+
     },
     theme: ThemeData(
       primarySwatch: colorSwatch,
