@@ -9,44 +9,7 @@ import 'package:flutter/material.dart';
 import '../constant/routs.dart';
 import '../local_storage/localops.dart';
 
-class IssueFeed extends StatefulWidget {
-  const IssueFeed({Key? key}) : super(key: key);
 
-  @override
-  _IssueFeedState createState() => _IssueFeedState();
-}
-
-class _IssueFeedState extends State<IssueFeed> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Issue Feed'),
-        actions: [
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () async {
-                  await clearStorage();
-                  Navigator.pushReplacementNamed(context, Routes.root);
-                },
-                child: const Icon(
-                  Icons.logout,
-                  size: 26.0,
-                ),
-              )),
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: const Icon(Icons.more_vert),
-              )),
-        ],
-      ),
-      body: IssueBody(),
-    );
-  }
-}
 
 class IssueBody extends StatefulWidget {
   const IssueBody({Key? key}) : super(key: key);
