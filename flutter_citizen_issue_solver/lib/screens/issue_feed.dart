@@ -28,8 +28,7 @@ class _IssueFeedState extends State<IssueFeed> {
               child: GestureDetector(
                 onTap: () async {
                   await clearStorage();
-
-                  Navigator.pushReplacementNamed(context, Routes.loginWrapper);
+                  Navigator.pushReplacementNamed(context, Routes.root);
                 },
                 child: const Icon(
                   Icons.logout,

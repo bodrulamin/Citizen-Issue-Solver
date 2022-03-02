@@ -10,9 +10,9 @@ import 'models/user.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: Routes.dashboard,
-    routes: {
-      Routes.loginWrapper: (context) => const LoginWrapper(),
+    initialRoute: Routes.root,
+        routes: {
+      Routes.root: (context) => const LoginWrapper(),
       Routes.login: (context) => const LoginPage(),
       Routes.registration: (context) => const RegistrationPage(),
       Routes.dashboard: (context) =>  HomePage( ),
