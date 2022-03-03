@@ -60,14 +60,20 @@ class _IssueBodyState extends State<IssueBody> {
                 fit: BoxFit.fill,
               ),
 
-              Text(
-                shouts[index].shoutTitle,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Theme.of(context).colorScheme.error,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  shouts[index].shoutTitle,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
                 ),
               ),
-              Text(shouts[index].shoutmessage),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(shouts[index].shoutmessage),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
