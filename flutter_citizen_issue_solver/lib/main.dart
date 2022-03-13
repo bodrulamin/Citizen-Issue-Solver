@@ -1,23 +1,28 @@
 import 'package:citizen_issue_solver_flutter/constant/routs.dart';
 import 'package:citizen_issue_solver_flutter/screens/home.dart';
-import 'package:citizen_issue_solver_flutter/screens/issue_feed.dart';
 import 'package:citizen_issue_solver_flutter/screens/login.dart';
+import 'package:citizen_issue_solver_flutter/screens/mmm.dart';
 import 'package:citizen_issue_solver_flutter/screens/registration.dart';
 import 'package:citizen_issue_solver_flutter/theme/colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'local_storage/localops.dart';
 import 'models/user.dart';
 
 void main() {
+  if (defaultTargetPlatform == TargetPlatform.android) {
+    AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
+  }
   runApp(MaterialApp(
-    initialRoute: Routes.root,
-        routes: {
+    initialRoute: Routes.home,
+    routes: {
       Routes.root: (context) => const LoginWrapper(),
       Routes.login: (context) => const LoginPage(),
       Routes.registration: (context) => const RegistrationPage(),
-      Routes.home: (context) =>  HomePage( ),
-
+      Routes.home: (context) => HomePage(),
+      Routes.mapsample: (context) => MapBuildingView(),
     },
     theme: ThemeData(
       primarySwatch: colorSwatch,
@@ -64,7 +69,7 @@ class _LoginWrapperState extends State<LoginWrapper> {
             return const LoginPage();
           }
 
-          return  HomePage();
+          return HomePage();
         } else {
           return const CircularProgressIndicator();
         }
