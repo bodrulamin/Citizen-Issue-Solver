@@ -10,14 +10,7 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<int> counts = [
-      8000,
-      8000,
-      2000,
-      2000,
-      2000,
-      3000
-    ];
+    List<int> counts = [536, 241, 21, 78, 96, 32];
 
     List<String> images = [
       "assets/images/shoutcount.png",
@@ -30,10 +23,10 @@ class Dashboard extends StatelessWidget {
     List<String> titles = [
       "Issues",
       "Pending ",
-      "Pending ",
-      "Pending ",
+      "Processing ",
+      "Canceled",
       "Completed",
-          "Completed"
+      "Aborted"
     ];
     return Stack(
       children: <Widget>[
@@ -44,7 +37,7 @@ class Dashboard extends StatelessWidget {
           child: Center(
             child: GridView.count(
               scrollDirection: Axis.vertical,
-              crossAxisCount: 2,
+            crossAxisCount: MediaQuery.of(context).size.width>600?3:2,
               children: [
                 for (int i = 0; i < counts.length; i++)
                   DashCard(
@@ -103,7 +96,7 @@ class DashCard extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: Container(
-                    color: Colors.amber,
+                    color: colorSwatch.shade100,
                     child: Column(
                       children: [
                         Expanded(
@@ -136,7 +129,7 @@ class DashCard extends StatelessWidget {
           ),
           Center(
             child: AspectRatio(
-                aspectRatio: 1 / 2,
+                aspectRatio: 1 / 3,
                 child: Image.asset(
                   image,
                 )),
@@ -152,7 +145,8 @@ class DashCard extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
                       title,
-                      style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
