@@ -1,4 +1,4 @@
 # Citizen Issue Solver
 
-## Project Site
+## Project webite
 <a href="https://bodrulamin.github.io/Citizen-Issue-Solver">Click here</a>
