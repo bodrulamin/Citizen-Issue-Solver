@@ -6,6 +6,7 @@ import 'package:citizen_issue_solver_flutter/models/shout.dart';
 import 'package:citizen_issue_solver_flutter/networks/issue.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 import '../constant/routs.dart';
 import '../local_storage/localops.dart';
@@ -78,7 +79,14 @@ class _IssueBodyState extends State<IssueBody> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(onPressed: () {}, child: Text("Edit")),
-                  TextButton(onPressed: () {}, child: Text("delete")),
+                  TextButton(onPressed: () {
+                    deleteIssue(shouts[index]).then((value) {
+                      setState(() {
+
+                      });
+                    });
+
+                  }, child: Text("delete")),
                 ],
               )
             ],

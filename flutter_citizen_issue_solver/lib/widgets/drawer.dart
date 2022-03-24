@@ -48,7 +48,8 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.logout), title: Text("Logout"),
             onTap: () async {
               await clearStorage();
-              Navigator.pushReplacementNamed(context, Routes.root);
+
+              Navigator.pushReplacementNamed(context, Routes.login);
             },
           ),
           ListTile(

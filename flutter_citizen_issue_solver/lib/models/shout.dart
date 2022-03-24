@@ -108,7 +108,7 @@ class Shout {
       'shoutmessage': this.shoutmessage,
       'address': this.address,
       'status': this.status,
-      'date': this.date,
+      'date': this.date?.toIso8601String(),
       'photo': this.photo,
     };
   }

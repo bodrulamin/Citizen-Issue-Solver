@@ -18,9 +18,9 @@ void main() {
   runApp(MaterialApp(
     initialRoute: Routes.home,
     routes: {
-      Routes.root: (context) => const LoginWrapper(),
-      Routes.login: (context) => const LoginPage(),
-      Routes.registration: (context) => const RegistrationPage(),
+      Routes.root: (context) =>  LoginWrapper(),
+      Routes.login: (context) =>  LoginPage(),
+      Routes.registration: (context) =>  RegistrationPage(),
       Routes.home: (context) => HomePage(),
       Routes.mapsample: (context) => MapBuildingView(),
     },
